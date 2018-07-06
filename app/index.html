@@ -43,27 +43,35 @@
                 <div role="tabpanel" class="tab-pane active" id="images">
                     <div id="image-tabs-status">
                         <ul class="nav nav-pills">
-                            <li role="presentation" class="active" data-toggle="tooltip" title="Show images from the camera in the
-                                range of 2mm and up" data-placement="right" onclick="updateMosaicImages({preset:'reallybig'})">
+                            <li id='reallybig' role="presentation" class="active" data-toggle="tooltip" title="Show images from the camera in the
+                                range of 2mm and up" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">> 60 um</a>
                             </li>
-                            <li role="presentation" data-toggle="tooltip" title="Show images from the camera in the
-                                range of 1mm and up" data-placement="right" onclick="updateMosaicImages({preset:'big'})">
+                            <li id='big' role="presentation" data-toggle="tooltip" title="Show images from the camera in the
+                                range of 1mm and up" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">> 30 um</a>
                             </li>
-                            <li role="presentation" data-toggle="tooltip" title="Show images from the camera in the
-                                range 1 mm and down" data-placement="right" onclick="updateMosaicImages({preset:'small'})">
+                            <li id='small' role="presentation" data-toggle="tooltip" title="Show images from the camera in the
+                                range 1 mm and down" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">< 30 um</a>
                             </li>
-                            <li role="presentation" data-toggle="tooltip" title="Show images from the camera in the
-                                range 0.5 mm and down" data-placement="right" onclick="updateMosaicImages({preset:'verysmall'})">
+                            <li id='verysmall' role="presentation" data-toggle="tooltip" title="Show images from the camera in the
+                                range 0.5 mm and down" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">< 15 um</a>
                             </li>
-                            <li role="presentation" data-toggle="tooltip" title="Show images from the camera with aspect ratios between 0.0 and 0.1" data-placement="right" onclick="updateMosaicImages({preset:'long'})">
+                            <li id='long' role="presentation" data-toggle="tooltip" title="Show images from the camera with aspect ratios between 0.0 and 0.1" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">[0.0,0.1] Aspect</a>
                             </li>
-                            <li role="presentation" data-toggle="tooltip" title="Show images from the camera with aspect ratios between 0.8 and 1.0" data-placement="right" onclick="updateMosaicImages({preset:'round'})">
+                            <li id='round' role="presentation" data-toggle="tooltip" title="Show images from the camera with aspect ratios between 0.8 and 1.0" data-placement="right" onclick="updateMosaicImages()">
                                 <a class="nav-pill" href="#" role="tab" data-toggle="tab">[0.8,1.0] Aspect</a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-pills">
+                            <li id="SortByTime" role="presentation" class="active" data-toggle="tooltip" title="Sort images by timestamp" onclick="updateMosaicImages()" >
+                                <a class="nav-pill" href="#" role="tab" data-toggle="tab">Sort by timestamp</a>
+                            </li>
+                            <li id="SortByHeight" role="presentation" data-toggle="tooltip" title="Sort images by height desc" onclick="updateMosaicImages()" >
+                                <a class="nav-pill" href="#" role="tab" data-toggle="tab">Sort by height</a>
                             </li>
                             <li style="float:right;">
                                 <a id="info-text" href="#"></a>

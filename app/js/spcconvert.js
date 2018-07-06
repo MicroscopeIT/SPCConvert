@@ -119,7 +119,7 @@ function buildImageMosaic(imageItems) {
         $('#loading-progress').width(pct.toString()+"%");
         if (loadedCounter >= imageItems.length) {
             $('#loading-progress').html('Finished');
-            $('.progress').fadeOut(4000);
+            $('.progress').fadeOut(400);
         }
         else {
             $('#loading-progress').html("Loaded "+loadedCounter.toString()+" of "+imageItems.length.toString()+" images");
@@ -178,8 +178,8 @@ function buildImageMosaic(imageItems) {
     
 }
 
-function updateMosaicImages(query) {
-    
+function updateMosaicImages() {
+
     $('#loading-progress').width("100%");
     $('#loading-progress').html('Querying Images...');
     $('#loading-progress').addClass('progress-bar-striped');
@@ -188,38 +188,44 @@ function updateMosaicImages(query) {
     imageItems = [];
     
     $('.progress').fadeIn(250,function () {
-    
-        if (typeof query['preset'] != 'undefined') {
-            if (query['preset'] == 'reallybig') {
-                imageItems = roistore({major_axis_length:{gt:90}}).order("height desc").get();
-            }
-            else if (query['preset'] == 'big') {
-                imageItems = roistore({major_axis_length:{gt:45}}).order("height desc").get();
-            }
-            else if (query['preset'] == 'small') {
-                imageItems = roistore({major_axis_length:{lt:45}}).order("height desc").get();
-            }
-            else if (query['preset'] == 'verysmall') {
-                imageItems = roistore({major_axis_length:{lt:22}}).order("height desc").get();
-            }
-            else if (query['preset'] == 'long') {
-                imageItems = roistore({aspect_ratio:{gt:0.0,lt:0.1}}).order("height desc").get();
-            }
-            else if (query['preset'] == 'round') {
-                imageItems = roistore({aspect_ratio:{gt:0.8,lt:1.0}}).order("height desc").get();
-            }
-            $('#loading-progress').html('Building Mosaic...');
-            $('#loading-progress').removeClass('progress-bar-striped');
-            $('#loading-progress').toggleClass('progress-bar-danger progress-bar-primary');
-            buildImageMosaic(imageItems);
+
+        ordered_by_time = $('#SortByTime').hasClass('active');
+        if (ordered_by_time)
+            order = 'timestamp asec'
+        else
+            order = 'height desc'
+
+        if ($('#reallybig').hasClass('active')) {
+            imageItems = roistore({major_axis_length:{gt:90}}).order(order).get();
+        }
+        else if ($('#big').hasClass('active')) {
+            imageItems = roistore({major_axis_length:{gt:45}}).order(order).get();
+        }
+        else if ($('#small').hasClass('active')) {
+            imageItems = roistore({major_axis_length:{lt:45}}).order(order).get();
+        }
+        else if ($('#verysmall').hasClass('active')) {
+            imageItems = roistore({major_axis_length:{lt:22}}).order(order).get();
+        }
+        else if ($('#long').hasClass('active')) {
+            imageItems = roistore({aspect_ratio:{gt:0.0,lt:0.1}}).order(order).get();
+        }
+        else if ($('#round').hasClass('active')) {
+            imageItems = roistore({aspect_ratio:{gt:0.8,lt:1.0}}).order(order).get();
+        }
+        $('#loading-progress').html('Building Mosaic...');
+        $('#loading-progress').removeClass('progress-bar-striped');
+        $('#loading-progress').toggleClass('progress-bar-danger progress-bar-primary');
+        buildImageMosaic(imageItems);
+
+        /* no need for query, current setting is extracted from html
         }
         else {
             $('#loading-progress').html('Query Error, Aborted.');
             $('#loading-progress').addClass('progress-bar-danger');
-            $('.progress').fadeOut(4000);
-        }
+            $('.progress').fadeOut(400);
+        } */
     });
-    
 }
 
 $('#ImageDetail').on('hide.bs.modal', function (e) {
@@ -236,5 +242,5 @@ $( document ).ready(function() {
     
   $('#tabs').removeClass('collapse');
   //$('.progress').addClass('collapse');
-  updateMosaicImages({preset:'reallybig'});
+  updateMosaicImages();
 });
