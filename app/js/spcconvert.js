@@ -191,7 +191,7 @@ function updateMosaicImages() {
 
         ordered_by_time = $('#SortByTime').hasClass('active');
         if (ordered_by_time)
-            order = 'timestamp asec'
+            order = 'timestamp asec, area asec'
         else
             order = 'height desc'
 
